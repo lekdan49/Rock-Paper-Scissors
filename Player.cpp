@@ -23,7 +23,7 @@ Move Game::random_move() // probably should use hardware random gen
 	return ai_move;
 }
 
-bool outcome(const Move &m1, const Move &m2)
+bool outcome(const Move &m1, const Move &m2) // i don't like this, it looks ugly but who cares
 {
 	if (m1 == m2)
 	{
