@@ -17,6 +17,7 @@ enum class Move // enum class is better than plain enum
 	Scissors
 };
 
+
 bool outcome(const Move &m1, const Move &m2);
 
 class Game {
@@ -26,10 +27,10 @@ public:
 
 	// methods
 	ostream &game_start(ostream &os) const;
-	ostream &game_end(ostream &os) const;
-	Move random_move();
+	ostream &game_end(ostream &os, const int &player_score) const;
+	Move comp_move();
 	Move move() const { return ai_move; }
-	void increment() { score++; }
+	int increment_score(const int &i) { return score += i; }
 
 private:
 	Move ai_move{ Move::None };
@@ -46,8 +47,8 @@ public:
 	//methods
 	istream &get_move(istream &is);
 	Move move() const { return current_move; }
-	int score() const { return player_score; }
-
+	int increment_score(const int &i) { return player_score += i ; }
+	
 
 private:
 	int player_score{ 0 };

@@ -23,13 +23,26 @@ int main()
 	{
 		g.game_start(cout);
 		p.get_move(cin);
-		g.random_move();
+		g.comp_move();
+
 		cout << "You played: " << text_move(p.move()) << '\n';
 		cout << "Computer Played: " << text_move(g.move()) << '\n';
-		if (outcome(p.move(), g.move()))
-		{
 
+		if (p.move() == g.move())
+		{
+			cout << "DRAW! " << '\n';
 		}
+		else if (outcome(p.move(), g.move()))
+		{
+			cout << "YOU WIN!" << '\n';
+			p.increment_score(1);
+		}
+		else
+		{
+			cout << "YOU LOSE!" << '\n';
+			g.increment_score(1);
+		}
+		g.game_end(cout, p.increment_score(0));
 	} while (true);
 
 	return 0;

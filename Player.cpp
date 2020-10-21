@@ -16,23 +16,42 @@ ostream &Game::game_start(ostream &os) const
 	return os;
 }
 
-Move Game::random_move() // probably should use hardware random gen
+ostream &Game::game_end(ostream &os, const int &player_score) const
+{
+	os << "Player Score: " << player_score << '\n'
+		<< "Computer Score: " << score << '\n';
+	return os;
+}
+
+Move Game::comp_move() // probably should use hardware random gen
 {
 	srand(time(nullptr)); // initialize random seed
 	ai_move = static_cast<Move>(rand() % 3 + 1);
 	return ai_move;
 }
 
-bool outcome(const Move &m1, const Move &m2) // i don't like this, it looks ugly but who cares
+bool outcome(const Move &m1, const Move &m2) // i don't like this, it looks ugly
 {
-	if (m1 == m2)
+	if (m1 == Move::Rock)
 	{
-		return false;
+		if (m2 == Move::Paper)
+			return false;
+		if (m2 == Move::Scissors)
+			return true;
 	}
-	if (m1 == Move::Rock && m2 == Move::Paper)
+	if (m1 == Move::Paper)
 	{
-		return false;
+		if (m2 == Move::Scissors)
+			return false;
+		if (m2 == Move::Rock)
+			return true;
 	}
-
+	if (m1 == Move::Scissors)
+	{
+		if (m2 == Move::Rock)
+			return false;
+		if (m2 == Move::Paper)
+			return true;
+	}
 	return true;
 }
